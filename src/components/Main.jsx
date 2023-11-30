@@ -3,7 +3,7 @@ import { RxCross1 } from "react-icons/rx";
 
 export default function Main(
   {theme, iconChecked, handleDeleteTodo,
-    todoList, handleTodoClick, itemsLeftCount}
+    todoList, handleTodoClick, itemsLeftCount, deleteCheckedTodos}
   ) {
     
   const switchTheme = theme === "light" 
@@ -65,7 +65,7 @@ export default function Main(
             {todoList.length > 0 && (
               <ul className={`${switchThemeThree} flex items-center sm:py-5 sm:px-6 text-lg font-medium rounded-b-xl`}>
                 <li>{itemsLeftCount} item{itemsLeftCount !== 1 ? 's' : ''} left</li>
-                <li className='ml-auto'>clear completed</li>
+                <li onClick={deleteCheckedTodos} className='ml-auto'>clear completed</li>
               </ul>
             )}
           </div>

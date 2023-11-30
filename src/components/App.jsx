@@ -68,6 +68,24 @@ export default function App() {
       setInputValue('');
     }
   };
+  const deleteCheckedTodos = () => {
+    const todoRef = ref(database, 'todo-main');
+    // Filter out the checked todos
+    const todosToDelete = todoList.filter((todo) => todo.isChecked);
+    // Create an object to store updates for each checked todo
+    const updates = {};
+    // Delete each checked todo
+    todosToDelete.forEach((todo) => {
+      updates[todo.id] = null; // Set to null to delete the todo
+    });
+  
+    // Apply the updates to Firebase
+    update(todoRef, updates);
+  
+    // Optionally, update your component state to reflect the removal
+    setTodoList((prevTodo) => prevTodo.filter((todo) => !todo.isChecked));
+  };
+  
 
   return (
     <section className={`font-Josefin ${switchTheme} overflow-hidden`}
@@ -91,6 +109,7 @@ export default function App() {
         itemsLeftCount={itemsLeftCount}
         iconChecked={iconChecked}
         handleDeleteTodo={handleDeleteTodo}
+        deleteCheckedTodos={deleteCheckedTodos}
       />
       </section>
     </section>

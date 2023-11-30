@@ -57,5 +57,9 @@ const removeTodoFromFirebase = (todoId) => {
 
   return remove(todoItemRef);
 };
-export { database, pushInputValueToFirebase, fetchTodoListFromFirebase, 
-  ref, remove , removeTodoFromFirebase, update};
+
+export { 
+  database, pushInputValueToFirebase, 
+  fetchTodoListFromFirebase, ref, remove , 
+  removeTodoFromFirebase, update
+};
