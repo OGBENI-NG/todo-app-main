@@ -14,20 +14,31 @@ export default function App() {
   const {theme, toggleTheme} = useContext(ThemeContext)
   const [inputValue, setInputValue] = useState("")
   const [todoList, setTodoList] = useState([]);
-  const itemsLeftCount = todoList.filter((todo) => !todo.isChecked).length;
+ 
+  const [filter, setFilter] = useState('All');
   
   const switchTheme = theme === "light" 
     ? "bg-lightTheme-very-light-grayish-blue " 
     : "bg-darkTheme-very-dark-blue"
   ;
 
-  useEffect(() => {
-    fetchTodoListFromFirebase((data) => {
-      // Use unshift to add the new todo at the beginning of the array
-      setTodoList(data);
-    });
+  const filteredTodos = () => {
+    switch (filter) {
+      case 'Active':
+        return todoList.filter(todo => !todo.isChecked);
+      case 'Completed':
+        return todoList.filter(todo => todo.isChecked);
+      default:
+        return todoList;
+    }
+  };
+  const itemsLeftCount = filteredTodos().filter(todo => !todo.isChecked).length;
 
-  }, []);
+  useEffect(() => {
+    // Fetch todo list from Firebase and set it to state
+    // Example fetchTodoListFromFirebase function from your setup
+    fetchTodoListFromFirebase((todos) => setTodoList(todos));
+  }, [])
 
   //delete each todo one by one
   const handleDeleteTodo = (todoId) => {
@@ -66,6 +77,7 @@ export default function App() {
     if (inputValue.trim() !== '') {
       pushInputValueToFirebase(inputValue);
       setInputValue('');
+      setFilter("All")
     }
   };
   const deleteCheckedTodos = () => {
@@ -110,6 +122,9 @@ export default function App() {
         iconChecked={iconChecked}
         handleDeleteTodo={handleDeleteTodo}
         deleteCheckedTodos={deleteCheckedTodos}
+        setFilter={setFilter}
+        filter={filter}
+        filteredTodos={filteredTodos}
       />
       </section>
     </section>
