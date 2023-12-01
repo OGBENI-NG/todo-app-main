@@ -102,7 +102,7 @@ export default function App() {
   return (
     <section className={`font-Josefin ${switchTheme} overflow-hidden`}
     >
-      <section className='h-screen overflow-x-hidden'>
+      <section className='  overflow-visible'>
       <Header
         lightBgDkt={lightBgDkt}
         lightBgMb={lightBgMb}
