@@ -84,7 +84,7 @@ export default function Main(
         </div>
       }
       <p className={`${switchThemeThree} bg-transparent text-center text-lg mt-12`}>
-        Drag and drop to reorder list
+        {!todoList.length ? 'NO TODO' : 'Drag and drop to reorder list'}
       </p>
      </section>
     </main>
