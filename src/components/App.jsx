@@ -100,33 +100,35 @@ export default function App() {
   
 
   return (
-    <section className={`font-Josefin ${switchTheme} overflow-hidden`}
+    <main className={`font-Josefin  ${switchTheme} ${!todoList.length && "h-screen overflow-hidden"} `}
     >
-      <section className='  overflow-visible'>
-      <Header
-        lightBgDkt={lightBgDkt}
-        lightBgMb={lightBgMb}
-        darkBgDkt={darkBgDkt}
-        darkBgMb={darkBgMb}
-        toggleTheme={toggleTheme}
-        inputValue={inputValue}
-        handleSendTodo={handleSendTodo}
-        handleChange={handleChange}
-      />
-      <Main
-        theme={theme}
-        toggleTheme={toggleTheme}
-        todoList={todoList}
-        handleTodoClick={handleTodoClick}
-        itemsLeftCount={itemsLeftCount}
-        iconChecked={iconChecked}
-        handleDeleteTodo={handleDeleteTodo}
-        deleteCheckedTodos={deleteCheckedTodos}
-        setFilter={setFilter}
-        filter={filter}
-        filteredTodos={filteredTodos}
-      />
+      <section className={ `relative z-0 overflow-x-hidden `}>
+        <section className=''>
+          <Header
+          lightBgDkt={lightBgDkt}
+          lightBgMb={lightBgMb}
+          darkBgDkt={darkBgDkt}
+          darkBgMb={darkBgMb}
+          toggleTheme={toggleTheme}
+          inputValue={inputValue}
+          handleSendTodo={handleSendTodo}
+          handleChange={handleChange}
+        />
+        <Main
+          theme={theme}
+          toggleTheme={toggleTheme}
+          todoList={todoList}
+          handleTodoClick={handleTodoClick}
+          itemsLeftCount={itemsLeftCount}
+          iconChecked={iconChecked}
+          handleDeleteTodo={handleDeleteTodo}
+          deleteCheckedTodos={deleteCheckedTodos}
+          setFilter={setFilter}
+          filter={filter}
+          filteredTodos={filteredTodos}
+        />
+        </section>
       </section>
-    </section>
+    </main>
   )
 }

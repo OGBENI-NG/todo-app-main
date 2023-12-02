@@ -23,11 +23,11 @@ export default function Main(
     : "text-darkTheme-very-dark-grayish-blue-1"
   ;
   return (
-    <main className='sm:px-4 h-screen'>
-      <section className='flex items-center mt-[9.8rem] justify-center w-full '>
-        <section className='sm:py-7 w-full '>
-          <section className='w-full m-auto '>
-            <div className='relative h-auto'>
+    <main className='sm:px-4'>
+      <section className='flex items-center mt-[9.8rem] justify-center w-full'>
+        <section className='sm:py-7 w-full'>
+          <section className='w-full m-auto'>
+            <div className='relative'>
               {filteredTodos().map((todo) => (
                 <ul 
                   key={todo.id} 
@@ -71,9 +71,9 @@ export default function Main(
           </section>
         </section>
       </section>
-     <section className='relative z-1'>
+     <section className='relative z-1 h-auto sm:py-2'>
       {todoList.length > 0 &&
-        <div className={`${switchThemeThree} font-bold text-xl sm:mb-6 flex 
+        <div className={`${switchThemeThree} font-bold text-xl flex 
         justify-center gap-8 py-5 rounded-xl`}>
           <span onClick={() => setFilter('All')}
           className={filter === 'All' ? 'text-primary-bright-blue' : ''}>All</span>

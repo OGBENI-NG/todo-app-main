@@ -21,7 +21,7 @@ export default function Header({lightBgDkt, darkBgDkt, lightBgMb, darkBgMb, togg
 
   return (
     <header className={`h-full w-full absolute top-0 left-0 right-0 `}>
-      <section className='absolute z-[1] top-9 right-0 left-0 sm:pt-2 sm:py-8 sm:px-4'>
+      <section className='absolute z-[0] top-9 right-0 left-0 sm:pt-2 sm:py-8 sm:px-4'>
         <div className={`flex items-center sm:text-4xl md:text-6xl  text-lightTheme-very-light-gray`}>
           <h1 className='font-bold  tracking-widest'>TODO</h1>
           <div className='ml-auto rotate-[345deg]' onClick={toggleTheme}>
@@ -47,7 +47,7 @@ export default function Header({lightBgDkt, darkBgDkt, lightBgMb, darkBgMb, togg
           />
         </div>
       </section>
-      <section className='relative -z-[0]'>
+      <section className=''>
         {theme === "light" 
           ? (
             <section className={`sm:h-[220px] md:h-[280px] lg:h-full`}>
