@@ -102,7 +102,7 @@ export default function App() {
   return (
     <main className={`font-Josefin  ${switchTheme} ${!todoList.length && "h-screen overflow-hidden"} `}
     >
-      <section className={ `relative z-0 overflow-x-hidden `}>
+      <section className={ `relative z-0 overflow-x-hidden h-screen`}>
         <section className=''>
           <Header
           lightBgDkt={lightBgDkt}
