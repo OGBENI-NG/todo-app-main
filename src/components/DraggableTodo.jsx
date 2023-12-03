@@ -3,6 +3,8 @@ import { Draggable } from 'react-beautiful-dnd';
 import { RxCross1 } from 'react-icons/rx';
 
 const DraggableTodo = ({ id, index, handleTodoClick, handleDeleteTodo, switchTheme, switchThemeTwo, checkColor, isChecked, value, iconChecked }) => {
+  const isFirstItem = index === 0;
+
   return (
     <Draggable draggableId={id} index={index}>
       {(provided) => (
@@ -11,7 +13,7 @@ const DraggableTodo = ({ id, index, handleTodoClick, handleDeleteTodo, switchThe
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <ul className={`animate-myAnim w-full sm:p-5 sm:px-5 border-b-[1.5px] space-y-2 flex items-center gap-3 ${switchTheme}`}>
+          <ul className={`w-full sm:p-5 sm:px-5 border-b-[1.5px] space-y-2 flex items-center gap-3 ${switchTheme} ${isFirstItem && "animate-myAnim"} ${isFirstItem ? "first:rounded-t-lg" : ""}`}>
             <div onClick={() => handleTodoClick(id)} className='flex items-center gap-3 w-full'>
               <div>
                 {isChecked ? (
@@ -22,7 +24,7 @@ const DraggableTodo = ({ id, index, handleTodoClick, handleDeleteTodo, switchThe
                   <div className={`h-7 w-7 border-[2px] rounded-full ${switchThemeTwo}`}></div>
                 )}
               </div>
-              <li className={`first:rounded-t-xl ${isChecked && `line-through ${checkColor}`} text-lg mt-1 font-medium`}>
+              <li className={`${isChecked && `line-through ${checkColor}`} text-lg mt-1 font-medium`}>
                 {value}
               </li>
             </div>
