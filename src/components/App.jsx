@@ -76,12 +76,15 @@ export default function App() {
 
   const handleSendTodo = () => {
     if (inputValue.trim() !== '') {
-      const position = 0 // Set the position as the last index
-      pushInputValueToFirebase(inputValue, position);
+      const timestamp = Date.now(); // Use a timestamp as a position
+      pushInputValueToFirebase(inputValue, timestamp);
       setInputValue('');
       setFilter("All");
     }
   };
+  
+  
+  
   
   const deleteCheckedTodos = () => {
     const todoRef = ref(database, 'todo-main');
@@ -100,6 +103,8 @@ export default function App() {
     // Optionally, update your component state to reflect the removal
     setTodoList((prevTodo) => prevTodo.filter((todo) => !todo.isChecked));
   };
+
+  //drag and drop todo
   const handleTodoMove = (result) => {
     if (!result.destination) return;
   
@@ -107,9 +112,10 @@ export default function App() {
     const [movedTodo] = updatedTodoList.splice(result.source.index, 1);
     updatedTodoList.splice(result.destination.index, 0, movedTodo);
   
+    // Update the positions in the state
     setTodoList(updatedTodoList);
   
-    // Update the Firebase database with the new order
+    // Update the Firebase database with the new order and positions
     const todoRef = ref(database, 'todo-main');
     const updates = {};
   
@@ -120,6 +126,7 @@ export default function App() {
   
     update(todoRef, updates);
   };
+  
   
 
   return (

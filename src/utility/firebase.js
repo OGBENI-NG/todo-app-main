@@ -21,16 +21,14 @@ const pushInputValueToFirebase = (inputValue, position) => {
   const todoRef = ref(database, 'todo-main');
   const newPostRef = push(todoRef);
 
-  const timestamp = Date.now(); // Add a timestamp for ordering
   set(newPostRef, {
     value: inputValue,
     isChecked: false,
-    timestamp: timestamp,
-    position: position, // Add position property
+    timestamp: Date.now(),
+    position: position, // Use the timestamp as position
   });
 };
 
-// fetch data from firebase
 const fetchTodoListFromFirebase = (callback) => {
   const todoRef = ref(database, 'todo-main');
 
@@ -44,9 +42,9 @@ const fetchTodoListFromFirebase = (callback) => {
           value: data[key].value,
           isChecked: data[key].isChecked,
           timestamp: data[key].timestamp || 0,
-          position: data[key].position || 0, // Add position property
+          position: data[key].position || 0,
         }))
-        .sort((a, b) => a.position - b.position); // Sort by position
+        .sort((a, b) => b.position - a.position); // Sort by position in descending order
 
       callback(todoList);
     } else {
@@ -54,6 +52,7 @@ const fetchTodoListFromFirebase = (callback) => {
     }
   });
 };
+
 
 
 const removeTodoFromFirebase = (todoId) => {
