@@ -21,14 +21,15 @@ const pushInputValueToFirebase = (inputValue) => {
   const todoRef = ref(database, 'todo-main');
   const newPostRef = push(todoRef);
 
-  // Use a fixed position value for new todos
+  // Use a negative timestamp as a position for new todos
   set(newPostRef, {
     value: inputValue,
     isChecked: false,
     timestamp: Date.now(),
-    position: 0, // Use 0 as a fixed position for new todos
+    position: -Date.now(), // Use a negative timestamp as a position for new todos
   });
 };
+
 
 const fetchTodoListFromFirebase = (callback) => {
   const todoRef = ref(database, 'todo-main');
@@ -45,7 +46,7 @@ const fetchTodoListFromFirebase = (callback) => {
           timestamp: data[key].timestamp || 0,
           position: data[key].position || 0,
         }))
-        .sort((a, b) => a.position - b.position); // Sort by position in ascending order
+        .sort((a, b) => a.position - b.position); // Sort by position in descending order
 
       callback(todoList);
     } else {
@@ -53,8 +54,6 @@ const fetchTodoListFromFirebase = (callback) => {
     }
   });
 };
-
-
 
 
 const removeTodoFromFirebase = (todoId) => {
