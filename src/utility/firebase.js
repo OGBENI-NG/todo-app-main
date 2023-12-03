@@ -44,7 +44,7 @@ const fetchTodoListFromFirebase = (callback) => {
           timestamp: data[key].timestamp || 0,
           position: data[key].position || 0,
         }))
-        .sort((a, b) => b.position - a.position); // Sort by position in descending order
+        .sort((a, b) => a.position - b.position); // Sort by position in descending order
 
       callback(todoList);
     } else {
