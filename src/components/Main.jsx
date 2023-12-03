@@ -1,11 +1,24 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { RxCross1 } from "react-icons/rx";
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import DraggableTodo from './DraggableTodo';
+
+
 
 export default function Main(
-  {theme, iconChecked, handleDeleteTodo, filter, setFilter, filteredTodos,
-    todoList, handleTodoClick, itemsLeftCount, deleteCheckedTodos}
+  { theme, iconChecked, handleDeleteTodo, filter, setFilter, todoList, handleTodoClick, itemsLeftCount, deleteCheckedTodos, setTodoList, filteredTodos }
   ) {
-    
+
+    const handleTodoMove = (result) => {
+      if (!result.destination) return;
+  
+      const updatedTodoList = Array.from(todoList);
+      const [movedTodo] = updatedTodoList.splice(result.source.index, 1);
+      updatedTodoList.splice(result.destination.index, 0, movedTodo);
+  
+      setTodoList(updatedTodoList);
+    };
+  
   const switchTheme = theme === "light" 
     ? "bg-lightTheme-very-light-gray text-lightTheme-very-dark-grayish-blue border-lightTheme-light-grayish-blue" 
     : "bg-darkTheme-very-dark-desaturated-blue text-lightTheme-very-light-grayish-blue border-darkTheme-very-dark-grayish-blue-2"
@@ -27,41 +40,33 @@ export default function Main(
       <section className='flex items-center mt-[9.8rem] justify-center w-full'>
         <section className='sm:py-7 w-full'>
           <section className='w-full m-auto relative transition-all'>
-            {filteredTodos().map((todo) => (
-              <ul 
-                key={todo.id} 
-                className={`first:rounded-t-xl w-full
-                sm:p-5 sm:px-5 border-b-[1.5px] 
-                space-y-2 flex items-center gap-3
-                ${switchTheme}
-                ${todo.id && "animate-myAnim"}
-                
-              `}>
-                <div 
-                  onClick={() => handleTodoClick(todo.id)}
-                  className='flex items-center gap-3 w-full'
-                >
-                  <div>
-                    {todo.isChecked 
-                      ? (<div className={`h-7 w-7 rounded-full flex bg-gradient-to-r from-primary-firstColor to-primary-secondColor`}>
-                        <img className='m-auto w-4' src={iconChecked} alt="icon-checked" />
-                      </div>)
-                      : (<div className={`h-7 w-7 border-[2px] rounded-full ${switchThemeTwo}`}></div>)
-                    }
+          <DragDropContext onDragEnd={handleTodoMove}>
+              <Droppable droppableId="todoList" type="TODO">
+                {(provided) => (
+                  <div
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    {filteredTodos().map((todo, index) => (
+                      <DraggableTodo
+                        key={todo.id}
+                        index={index}
+                        id={todo.id}
+                        handleTodoClick={handleTodoClick}
+                        handleDeleteTodo={handleDeleteTodo}
+                        switchTheme={switchTheme}
+                        switchThemeTwo={switchThemeTwo}
+                        checkColor={checkColor}
+                        isChecked={todo.isChecked}
+                        value={todo.value}
+                        iconChecked={iconChecked}
+                      />
+                    ))}
+                    {provided.placeholder}
                   </div>
-                  <li className={`${todo.isChecked && `line-through ${checkColor}`} 
-                  text-lg mt-1 font-medium`}>
-                    {todo.value}
-                  </li>
-                </div>
-                <li 
-                  onClick={() => handleDeleteTodo(todo.id)}
-                  className={`${switchThemeTwo} ml-auto text-2xl`}
-                >
-                  <RxCross1  />
-                </li>
-              </ul>     
-            ))}
+                )}
+              </Droppable>
+            </DragDropContext>
             {todoList.length > 0 && (
               <ul className={`${switchThemeThree} flex items-center sm:py-5 sm:px-6 text-lg font-medium rounded-b-xl`}>
                 <li>{itemsLeftCount} item{itemsLeftCount !== 1 ? 's' : ''} left</li>
@@ -79,9 +84,9 @@ export default function Main(
           <span onClick={() => setFilter('All')}
           className={filter === 'All' ? 'text-primary-bright-blue' : ''}>All</span>
           <span onClick={() => setFilter('Active')}
-          className={filter === 'Active' ? 'text-primary-bright-blue' : ''}>Active</span>
+          className={filter === 'Active' ? 'text-yellow-500' : ''}>Active</span>
           <span onClick={() => setFilter('Completed')}
-          className={filter === 'Completed' ? 'text-primary-bright-blue' : ''}>Completed</span>
+          className={filter === 'Completed' ? 'text-green-500' : ''}>Completed</span>
         </div>
       }
       <p className={`${switchThemeThree} bg-transparent text-center text-lg pt-8 pb-12`}>

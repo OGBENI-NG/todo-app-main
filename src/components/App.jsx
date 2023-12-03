@@ -125,6 +125,7 @@ export default function App() {
           setFilter={setFilter}
           filter={filter}
           filteredTodos={filteredTodos}
+          setTodoList={setTodoList}
         />
         </section>
     </main>

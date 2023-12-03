@@ -16,6 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
+//send data to firebase
 const pushInputValueToFirebase = (inputValue) => {
   const todoRef = ref(database, 'todo-main');
   const newPostRef = push(todoRef);
@@ -27,7 +28,7 @@ const pushInputValueToFirebase = (inputValue) => {
     timestamp: timestamp,
   });
 };
-
+// fetch data from firebase
 const fetchTodoListFromFirebase = (callback) => {
   const todoRef = ref(database, 'todo-main');
 
