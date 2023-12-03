@@ -73,10 +73,10 @@ export default function App() {
     const newValue = value ? value.charAt(0).toUpperCase() + value.slice(1) : ""
     setInputValue(newValue)
   }
-  
+
   const handleSendTodo = () => {
     if (inputValue.trim() !== '') {
-      const position = todoList.length; // Set the position as the last index
+      const position = 0 // Set the position as the last index
       pushInputValueToFirebase(inputValue, position);
       setInputValue('');
       setFilter("All");
