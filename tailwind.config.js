@@ -6,9 +6,28 @@ export default {
   ],
   theme: {
     extend: {
+      //font-family
       fontFamily: {
         'Josefin': ['Josefin Sans', 'sans-serif'],
       },
+      // Add animation keyframes
+      keyframes: {
+        myAnim: {
+          '0%': {
+            opacity: 0,
+            transform: 'translateY(-50px)',
+          },
+          '100%': {
+            opacity: 1,
+            transform: 'translateY(0)',
+          },
+        },
+      },
+      // Add animation properties to the button
+      animation: {
+        'myAnim': 'myAnim .5s ease 0s 1 normal forwards',
+      },
+      //theme-colors
       colors: {
         primary: {
           'bright-blue': 'hsl(220, 98%, 61%)',
@@ -33,6 +52,7 @@ export default {
           'very-dark-grayish-blue-2': 'hsl(237, 14%, 26%)',
         },
       },
+      //media quarry
       screens: {
         'sm': '320px', // Added custom breakpoint for 320px
         'md': '768px',

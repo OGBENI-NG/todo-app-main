@@ -100,11 +100,10 @@ export default function App() {
   
 
   return (
-    <main className={`font-Josefin  ${switchTheme} ${!todoList.length && "h-screen overflow-hidden"} `}
+    <main className={`font-Josefin scroll-smooth ${switchTheme} ${!todoList.length && "h-screen overflow-hidden"} `}
     >
       <section className={ `relative z-0 overflow-x-hidden h-screen`}>
-        <section className=''>
-          <Header
+        <Header
           lightBgDkt={lightBgDkt}
           lightBgMb={lightBgMb}
           darkBgDkt={darkBgDkt}
@@ -128,7 +127,6 @@ export default function App() {
           filteredTodos={filteredTodos}
         />
         </section>
-      </section>
     </main>
   )
 }
