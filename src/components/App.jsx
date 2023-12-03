@@ -83,9 +83,6 @@ export default function App() {
     }
   };
   
-  
-  
-  
   const deleteCheckedTodos = () => {
     const todoRef = ref(database, 'todo-main');
     // Filter out the checked todos
@@ -126,6 +123,7 @@ export default function App() {
   
     update(todoRef, updates);
   };
+  
   
   
 
