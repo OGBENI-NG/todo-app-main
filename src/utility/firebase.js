@@ -17,15 +17,16 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 //send data to firebase
-const pushInputValueToFirebase = (inputValue, position) => {
+const pushInputValueToFirebase = (inputValue) => {
   const todoRef = ref(database, 'todo-main');
   const newPostRef = push(todoRef);
 
+  // Use a fixed position value for new todos
   set(newPostRef, {
     value: inputValue,
     isChecked: false,
     timestamp: Date.now(),
-    position: position, // Use the timestamp as position
+    position: 0, // Use 0 as a fixed position for new todos
   });
 };
 
@@ -44,7 +45,7 @@ const fetchTodoListFromFirebase = (callback) => {
           timestamp: data[key].timestamp || 0,
           position: data[key].position || 0,
         }))
-        .sort((a, b) => b.position - a.position); // Sort by position in descending order
+        .sort((a, b) => a.position - b.position); // Sort by position in ascending order
 
       callback(todoList);
     } else {
@@ -52,6 +53,7 @@ const fetchTodoListFromFirebase = (callback) => {
     }
   });
 };
+
 
 
 
