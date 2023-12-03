@@ -17,7 +17,7 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 //send data to firebase
-const pushInputValueToFirebase = (inputValue) => {
+const pushInputValueToFirebase = (inputValue, position) => {
   const todoRef = ref(database, 'todo-main');
   const newPostRef = push(todoRef);
 
@@ -26,8 +26,10 @@ const pushInputValueToFirebase = (inputValue) => {
     value: inputValue,
     isChecked: false,
     timestamp: timestamp,
+    position: position, // Add position property
   });
 };
+
 // fetch data from firebase
 const fetchTodoListFromFirebase = (callback) => {
   const todoRef = ref(database, 'todo-main');
@@ -42,8 +44,9 @@ const fetchTodoListFromFirebase = (callback) => {
           value: data[key].value,
           isChecked: data[key].isChecked,
           timestamp: data[key].timestamp || 0,
+          position: data[key].position || 0, // Add position property
         }))
-        .sort((a, b) => b.timestamp - a.timestamp); // Sort by timestamp in descending order
+        .sort((a, b) => a.position - b.position); // Sort by position
 
       callback(todoList);
     } else {
@@ -51,6 +54,7 @@ const fetchTodoListFromFirebase = (callback) => {
     }
   });
 };
+
 
 const removeTodoFromFirebase = (todoId) => {
   const todoRef = ref(database, 'todo-main');

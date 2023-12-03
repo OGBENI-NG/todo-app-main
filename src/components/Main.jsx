@@ -1,30 +1,17 @@
-import React, {useState} from 'react'
-import { RxCross1 } from "react-icons/rx";
+import React from 'react'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import DraggableTodo from './DraggableTodo';
 
-
-
 export default function Main(
-  { theme, iconChecked, handleDeleteTodo, filter, setFilter, todoList, handleTodoClick, itemsLeftCount, deleteCheckedTodos, setTodoList, filteredTodos }
+  { theme, iconChecked, handleDeleteTodo, filter, setFilter, todoList, handleTodoClick, itemsLeftCount, deleteCheckedTodos, handleTodoMove, filteredTodos }
   ) {
     const isNewTodo = (timestamp) => {
       const currentTime = Date.now();
-      const isNewThreshold = 60000; // Consider todos as new if created within the last minute
-    
+      const isNewThreshold = 2000; // Consider todos as new if created within the last minute
       return currentTime - timestamp < isNewThreshold;
     };
     
-
-    const handleTodoMove = (result) => {
-      if (!result.destination) return;
-  
-      const updatedTodoList = Array.from(todoList);
-      const [movedTodo] = updatedTodoList.splice(result.source.index, 1);
-      updatedTodoList.splice(result.destination.index, 0, movedTodo);
-  
-      setTodoList(updatedTodoList);
-    };
+   
   
   const switchTheme = theme === "light" 
     ? "bg-lightTheme-very-light-gray text-lightTheme-very-dark-grayish-blue border-lightTheme-light-grayish-blue" 
@@ -75,12 +62,14 @@ export default function Main(
                 )}
               </Droppable>
             </DragDropContext>
-            {todoList.length > 0 && (
-              <ul className={`${switchThemeThree} flex items-center sm:py-5 sm:px-6 text-lg font-medium rounded-b-xl`}>
-                <li>{itemsLeftCount} item{itemsLeftCount !== 1 ? 's' : ''} left</li>
-                <li onClick={deleteCheckedTodos} className='ml-auto'>clear completed</li>
-              </ul>
-            )}
+            <div>
+              {todoList.length > 0 && (
+                <ul className={`${switchThemeThree} flex items-center sm:py-5 sm:px-6 text-lg font-medium rounded-b-xl`}>
+                  <li>{itemsLeftCount} item{itemsLeftCount !== 1 ? 's' : ''} left</li>
+                  <li onClick={deleteCheckedTodos} className='ml-auto'>clear completed</li>
+                </ul>
+              )}
+            </div>
             
           </section>
         </section>

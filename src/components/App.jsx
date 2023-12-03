@@ -73,13 +73,16 @@ export default function App() {
     const newValue = value ? value.charAt(0).toUpperCase() + value.slice(1) : ""
     setInputValue(newValue)
   }
+  
   const handleSendTodo = () => {
     if (inputValue.trim() !== '') {
-      pushInputValueToFirebase(inputValue);
+      const position = todoList.length; // Set the position as the last index
+      pushInputValueToFirebase(inputValue, position);
       setInputValue('');
-      setFilter("All")
+      setFilter("All");
     }
   };
+  
   const deleteCheckedTodos = () => {
     const todoRef = ref(database, 'todo-main');
     // Filter out the checked todos
@@ -96,6 +99,26 @@ export default function App() {
   
     // Optionally, update your component state to reflect the removal
     setTodoList((prevTodo) => prevTodo.filter((todo) => !todo.isChecked));
+  };
+  const handleTodoMove = (result) => {
+    if (!result.destination) return;
+  
+    const updatedTodoList = Array.from(todoList);
+    const [movedTodo] = updatedTodoList.splice(result.source.index, 1);
+    updatedTodoList.splice(result.destination.index, 0, movedTodo);
+  
+    setTodoList(updatedTodoList);
+  
+    // Update the Firebase database with the new order
+    const todoRef = ref(database, 'todo-main');
+    const updates = {};
+  
+    // Update each todo's position in the database
+    updatedTodoList.forEach((todo, index) => {
+      updates[todo.id + '/position'] = index;
+    });
+  
+    update(todoRef, updates);
   };
   
 
@@ -126,6 +149,7 @@ export default function App() {
           filter={filter}
           filteredTodos={filteredTodos}
           setTodoList={setTodoList}
+          handleTodoMove={handleTodoMove}
         />
         </section>
     </main>
