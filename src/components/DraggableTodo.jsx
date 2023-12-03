@@ -11,7 +11,7 @@ const DraggableTodo = ({ id, index, handleTodoClick, handleDeleteTodo, switchThe
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <ul className={`first:rounded-t-xl w-full sm:p-5 sm:px-5 border-b-[1.5px] space-y-2 flex items-center gap-3 ${switchTheme} ${id && "animate-myAnim"}`}>
+          <ul className={`animate-myAnim w-full sm:p-5 sm:px-5 border-b-[1.5px] space-y-2 flex items-center gap-3 ${switchTheme}`}>
             <div onClick={() => handleTodoClick(id)} className='flex items-center gap-3 w-full'>
               <div>
                 {isChecked ? (
@@ -22,7 +22,7 @@ const DraggableTodo = ({ id, index, handleTodoClick, handleDeleteTodo, switchThe
                   <div className={`h-7 w-7 border-[2px] rounded-full ${switchThemeTwo}`}></div>
                 )}
               </div>
-              <li className={`${isChecked && `line-through ${checkColor}`} text-lg mt-1 font-medium`}>
+              <li className={`first:rounded-t-xl ${isChecked && `line-through ${checkColor}`} text-lg mt-1 font-medium`}>
                 {value}
               </li>
             </div>
