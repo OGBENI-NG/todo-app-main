@@ -118,7 +118,7 @@ export default function App() {
   
     // Update each todo's position in the database
     updatedTodoList.forEach((todo, index) => {
-      updates[todo.id + '/position'] = `new-${todo.timestamp}`; // Use a unique identifier for new todos
+      updates[todo.id + '/position'] = index;
     });
   
     update(todoRef, updates);
