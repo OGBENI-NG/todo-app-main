@@ -8,6 +8,13 @@ import DraggableTodo from './DraggableTodo';
 export default function Main(
   { theme, iconChecked, handleDeleteTodo, filter, setFilter, todoList, handleTodoClick, itemsLeftCount, deleteCheckedTodos, setTodoList, filteredTodos }
   ) {
+    const isNewTodo = (timestamp) => {
+      const currentTime = Date.now();
+      const isNewThreshold = 60000; // Consider todos as new if created within the last minute
+    
+      return currentTime - timestamp < isNewThreshold;
+    };
+    
 
     const handleTodoMove = (result) => {
       if (!result.destination) return;
@@ -60,6 +67,7 @@ export default function Main(
                         isChecked={todo.isChecked}
                         value={todo.value}
                         iconChecked={iconChecked}
+                        isNew={isNewTodo(todo.timestamp)}
                       />
                     ))}
                     {provided.placeholder}

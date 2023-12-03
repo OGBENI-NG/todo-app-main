@@ -2,7 +2,7 @@ import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { RxCross1 } from 'react-icons/rx';
 
-const DraggableTodo = ({ id, index, handleTodoClick, handleDeleteTodo, switchTheme, switchThemeTwo, checkColor, isChecked, value, iconChecked }) => {
+const DraggableTodo = ({ id, index, handleTodoClick, handleDeleteTodo, switchTheme, switchThemeTwo, checkColor, isChecked, value, iconChecked, isNew }) => {
   const isFirstItem = index === 0;
 
   return (
@@ -13,7 +13,7 @@ const DraggableTodo = ({ id, index, handleTodoClick, handleDeleteTodo, switchThe
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <ul className={`w-full sm:p-5 sm:px-5 border-b-[1.5px] space-y-2 flex items-center gap-3 ${switchTheme} ${isFirstItem && "animate-myAnim"} ${isFirstItem ? "first:rounded-t-lg" : ""}`}>
+          <ul className={`w-full sm:p-5 sm:px-5 border-b-[1.5px] space-y-2 flex items-center gap-3 ${switchTheme} ${isNew && "animate-myAnim"} ${isFirstItem ? "first:rounded-t-lg" : ""}`}>
             <div onClick={() => handleTodoClick(id)} className='flex items-center gap-3 w-full'>
               <div>
                 {isChecked ? (
