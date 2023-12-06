@@ -66,8 +66,9 @@ export default function Main({ theme, iconChecked, handleDeleteTodo,
   ;
 
   return (
-    <main className='sm:px-4 md:px-8'>
-      <section className='flex items-center sm:mt-[9.8rem] md:mt-[15rem] justify-center w-full'>
+    <main className='sm:px-4 md:px-8 lg:max-w-[550px] xl:max-w-[575px] lg:m-auto'>
+      <section className='flex items-center sm:mt-[9.8rem] md:mt-[15rem] 
+       justify-center w-full lg:mt-[16rem] xl:mt-[13rem]'>
         <section className='sm:py-7 w-full'>
           <section className='w-full m-auto relative transition-all'>
           <DragDropContext onDragEnd={handleTodoMove}>
@@ -100,7 +101,8 @@ export default function Main({ theme, iconChecked, handleDeleteTodo,
             </DragDropContext>
             <div>
               {todoList.length > 0 && (
-                <div className={`${switchThemeThree} flex items-center sm:py-5 sm:px-6 text-lg font-medium rounded-b-xl`}>
+                <div className={`${switchThemeThree} flex items-center sm:py-5 sm:px-6 sm:text-lg md:text-3xl md:p-8 font-medium rounded-b-md lg:text-xl
+                lg:py-4`}>
                   {renderTodoCount()}
                   <span onClick={deleteCheckedTodos} className='ml-auto'>clear completed</span>
                 </div>
@@ -109,25 +111,29 @@ export default function Main({ theme, iconChecked, handleDeleteTodo,
           </section>
         </section>
       </section>
-     <section className='relative z-1 h-auto sm:py-2'>
+     <section className='relative z-1 h-auto sm:py-2 '>
       {todoList.length > 0 &&
-        <div className={`${switchThemeThree} font-bold text-xl flex 
-        justify-center gap-8 py-5 rounded-xl`}>
+        <div className={`${switchThemeThree} font-bold sm:text-xl flex 
+        justify-center sm:gap-7 md:gap-10 sm:py-5 md:text-3xl md:p-8 rounded-md 
+        lg:text-xl lg:py-4`}>
           <span 
             onClick={() => setFilter('All')}
-            className={filter === 'All' ? 'text-primary-bright-blue' : ''}
+            className={filter === 'All' ? 'text-primary-bright-blue' : 'lg:cursor-pointer'}
           >All</span>
           <span 
             onClick={() => setFilter('Active')}
-            className={filter === 'Active' ? 'text-yellow-500' : ''}
+            className={filter === 'Active' ? 'text-yellow-500' : 'lg:cursor-pointer'}
           >Active</span>
           <span 
             onClick={() => setFilter('Completed')}
-            className={filter === 'Completed' ? 'text-green-500' : ''}
+            className={filter === 'Completed' ? 'text-green-500' : 'lg:cursor-pointer'}
           >Completed</span>
         </div>
       }
-      <p className={`${switchThemeThree} bg-transparent text-center text-lg pt-8 pb-12`}>
+      <p className={`${switchThemeThree} 
+        bg-transparent text-center sm:text-lg pt-8 pb-12
+        md:text-2xl`}
+      >
         {!todoList.length ? 'NO TODO' : 'Drag and drop to reorder list'}
       </p>
      </section>

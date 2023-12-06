@@ -18,25 +18,28 @@ const DraggableTodo = ({
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
+          
         >
-          <div className={`w-full sm:p-5 sm:px-5 border-b-[1.5px] space-y-2 flex items-center gap-3 ${switchTheme} ${isNew ? "animate-myAnim" : ""} ${isFirstItem ? "first:rounded-t-xl" : ""}`}>
-            <div onClick={() => handleTodoClick(id)} className='flex items-center gap-3 w-full'>
+          <div className={`w-full sm:p-5 sm:px-5 md:p-7 lg:cursor-pointer border-b-[1.5px] sm:space-y-2 md:space-y-3 lg:space-y-2 lg:py-4 flex items-center sm:gap-3 md:gap-8 ${switchTheme} ${isNew ? "animate-myAnim" : ""} ${isFirstItem ? "first:rounded-t-md" : ""}`}>
+            <div onClick={() => handleTodoClick(id)} className='flex items-center sm:gap-3 w-full md:gap-6'>
               <div>
                 {isChecked ? (
-                  <div className={`sm:h-7 sm:w-7 md:h-10 md:w-10 rounded-full flex bg-gradient-to-r from-primary-firstColor to-primary-secondColor`}>
-                    <img className='m-auto w-4' src={iconChecked} alt="icon-checked" />
+                  <div className={`sm:h-7 sm:w-7 md:h-10 md:w-10 lg:h-8 lg:w-8 rounded-full flex bg-gradient-to-r from-primary-firstColor to-primary-secondColor transition-all xl:w-7 xl:h-7`}>
+                    <img className='m-auto sm:w-4 md:w-6 lg:w-4 ' src={iconChecked} alt="icon-checked" />
                   </div>
                 ) : (
-                  <div className={`sm:h-7 sm:w-7 md:h-10 md:w-10 border-[2px] rounded-full ${switchThemeTwo}`}></div>
+                  <div className={`sm:h-7 sm:w-7 md:h-10 md:w-10 lg:h-8 lg:w-8 border-[2px] rounded-full xl:w-7 xl:h-7 ${switchThemeTwo}`}></div>
                 )}
               </div>
-              <ul>
-                <li className={`${isChecked && `line-through ${checkColor}`} text-lg mt-1 font-medium`}>
+              <ul className=''>
+                <li className={`${isChecked && `line-through ${checkColor}`} 
+                  sm:text-lg md:text-3xl lg:text-lg mt-1 sm:font-medium lg:font-normal 
+                  `}>
                   {value}
                 </li>
               </ul>
             </div>
-            <div onClick={() => handleDeleteTodo(id)} className={`${switchThemeTwo} ml-auto text-2xl`}>
+            <div onClick={() => handleDeleteTodo(id)} className={`${switchThemeTwo} ml-auto sm:text-2xl md:text-4xl lg:text-2xl`}>
               <RxCross1 />
             </div>
           </div>
