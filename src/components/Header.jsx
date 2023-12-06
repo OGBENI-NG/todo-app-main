@@ -28,7 +28,7 @@ export default function Header({lightBgDkt, darkBgDkt, lightBgMb,
       >
         <div className={`flex items-center sm:text-4xl md:text-6xl  text-lightTheme-very-light-gray lg:text-5xl lg:pb-4`}>
           <h1 className='font-bold  tracking-widest'>TODO</h1>
-          <div className='ml-auto rotate-[345deg]' onClick={toggleTheme}>
+          <div className='ml-auto rotate-[345deg] lg:cursor-pointer' onClick={toggleTheme}>
             {icon}
           </div>
         </div>
