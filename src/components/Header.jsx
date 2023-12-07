@@ -24,7 +24,7 @@ export default function Header({lightBgDkt, darkBgDkt, lightBgMb,
   return (
     <header className={`h-full w-full absolute top-0 left-0 right-0 overflow-hidden`}>
       <section className='absolute z-[0] top-9 right-0 left-0 sm:pt-2 sm:pb-8 sm:px-4
-        md:py-6 md:px-8 lg:py-12 lg:max-w-[550px] lg:m-auto xl:max-w-[580px] xl:top-5'
+        md:py-6 md:px-8 lg:py-12 lg:max-w-[580px] lg:m-auto xl:max-w-[600px] xl:top-5'
       >
         <div className={`flex items-center sm:text-4xl md:text-6xl  text-lightTheme-very-light-gray lg:text-5xl lg:pb-4`}>
           <h1 className='font-bold  tracking-widest'>TODO</h1>

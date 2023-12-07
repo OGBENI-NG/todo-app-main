@@ -77,8 +77,8 @@ export default function Main({ theme, iconChecked, handleDeleteTodo,
 
   const filterButtons = (
     <div className={`${switchThemeThree} sm:font-bold sm:text-xl flex lg:cursor-pointer
-      items-center justify-center lg:justify-between sm:gap-7 md:gap-10 sm:py-5 md:text-3xl md:p-8 rounded-md 
-      lg:text-lg lg:gap-6 lg:py-0 lg:font-normal lg:w-max lg:px-0`}
+      items-center justify-center sm:gap-7 md:gap-10 sm:py-5 md:text-3xl md:p-8 rounded-md 
+      lg:text-lg lg:gap-[18px] lg:py-0 lg:font-normal lg:w-max lg:px-0`}
     >
       <span 
         onClick={() => setFilter('All')}
@@ -96,14 +96,12 @@ export default function Main({ theme, iconChecked, handleDeleteTodo,
   );
   
   // Use filterButtons wherever you want in your JSX
-  
-
   return (
-    <main className='sm:px-4 md:px-8 lg:max-w-[550px] xl:max-w-[580px] lg:m-auto'>
+    <main className='sm:px-4 md:px-8 lg:max-w-[580px] xl:max-w-[600px] lg:m-auto'>
       <section className='flex items-center sm:mt-[9.8rem] md:mt-[15rem] 
        justify-center w-full lg:mt-[16rem] xl:mt-[13rem]'>
-        <section className='sm:py-7 lg:pb-0 w-full'>
-          <section className='w-full m-auto relative transition-all'>
+        <div className='sm:py-7 lg:pb-0 w-full'>
+          <div className='w-full m-auto relative transition-all'>
           <DragDropContext onDragEnd={handleTodoMove}>
               <Droppable droppableId="todoList" type="TODO">
                 {(provided) => (
@@ -136,17 +134,17 @@ export default function Main({ theme, iconChecked, handleDeleteTodo,
             <div>
               {todoList.length > 0 && (
                 <div className={`${switchThemeThree} flex items-center lg:justify-between 
-                sm:py-5 sm:px-6 lg:gap-3
+                sm:py-5 sm:px-6 lg:gap-6
                 sm:text-lg md:text-3xl md:p-8 sm:font-medium rounded-b-md lg:text-lg
                 lg:py-4 lg:px-6`}>
                   {renderTodoCount()}
-                  <div className='sm:hidden lg:block'>{filterButtons}</div>
+                  <div className='sm:hidden lg:block lg:ml-auto'>{filterButtons}</div>
                   <span onClick={deleteCheckedTodos} className={`sm:ml-auto lg:cursor-pointer lg:m-0 ${hoverColor}`}>clear completed</span>
                 </div>
               )}
             </div>
-          </section>
-        </section>
+          </div>
+        </div>
       </section>
      <section className='relative z-1 h-auto sm:py-2 lg:py-0'>
       {todoList.length > 0 &&
