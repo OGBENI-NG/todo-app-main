@@ -23,7 +23,7 @@ const DraggableTodo = ({
           <div 
             className={`w-full sm:p-5 sm:px-5 md:p-7 lg:cursor-pointer 
             border-b-[1.5px] sm:space-y-2 md:space-y-3 lg:space-y-2 lg:py-4 flex 
-            items-center sm:gap-3 md:gap-8 
+            items-center sm:gap-3 md:gap-8 lg:px-6
             ${switchTheme} 
             ${isNew ? "animate-myAnim" : ""} 
             ${isFirstItem ? "first:rounded-t-md" : ""}`}
