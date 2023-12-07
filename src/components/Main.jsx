@@ -97,7 +97,7 @@ export default function Main({ theme, iconChecked, handleDeleteTodo,
   
   // Use filterButtons wherever you want in your JSX
   return (
-    <main className='sm:px-4 md:px-8 lg:max-w-[580px] xl:max-w-[600px] lg:m-auto'>
+    <section className='sm:px-4 md:px-8 lg:max-w-[580px] xl:max-w-[600px] lg:m-auto'>
       <section className='flex items-center sm:mt-[9.8rem] md:mt-[15rem] 
        justify-center w-full lg:mt-[16rem] xl:mt-[13rem]'>
         <div className='sm:py-7 lg:pb-0 w-full'>
@@ -157,6 +157,6 @@ export default function Main({ theme, iconChecked, handleDeleteTodo,
         {!todoList.length ? 'TO-DO LIST IS EMPTY' : 'Drag and drop to reorder list'}
       </p>
      </section>
-    </main>
+    </section>
   )
 }
