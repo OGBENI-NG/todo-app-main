@@ -4,8 +4,8 @@ import { FaMoon } from "react-icons/fa6";
 import { HiSun } from "react-icons/hi2";
 
 export default function Header({lightBgDkt, darkBgDkt, lightBgMb,
-  darkBgMb, toggleTheme, handleChange,
-  inputValue, handleSendTodo
+  darkBgMb, toggleTheme, onChange,
+  inputValue, handleSendTodo, onKeyPress
   }) {
   const {theme} = useContext(ThemeContext)
   const lightBg = 'sm:hidden md:block w-full h-full'
@@ -35,21 +35,23 @@ export default function Header({lightBgDkt, darkBgDkt, lightBgMb,
         <div className='sm:mt-5 lg:cursor-pointer md:mt-9 lg:mt-10 md:h-[90px] sm:h-[60px] lg:h-[70px] xl:h-[65px] xl:mt-4 relative'>
           <div 
             onClick={handleSendTodo}
-            className={`absolute top-0 rounded-l-xl  ${switchTheme} h-full flex 
+            className={`absolute top-0 rounded-l-md  ${switchTheme} h-full flex 
             items-center justify-center sm:w-16 md:w-24 lg:w-20 -mr-4`}>
-            <div className={`sm:h-7 sm:w-7 md:h-10 md:w-10 lg:h-8 lg:w-8 border-[2px] rounded-full sm:top-[13px] sm:left-4 xl:w-7 xl:h-7  ${switchThemeTwo}`}>
+            <div className={`sm:h-7 sm:w-7 md:h-10 md:w-10 lg:h-8 lg:w-8 border-[2px] rounded-full sm:top-[13px] sm:left-4 xl:w-7 xl:h-7 
+             ${switchThemeTwo}`}>
             </div>
           </div>
           <input 
             name='text' 
             type="text"
             placeholder='Create a new todo...' 
-            onChange={handleChange}
+            onChange={onChange}
+            onKeyPress={onKeyPress}
             value={inputValue}
             className={`rounded-md active:bg-none focus:bg-none sm:pl-[4rem] 
             ${switchTheme} md:pl-[6rem] 
             w-full sm:text-lg md:text-4xl lg:text-2xl xl:text-lg outline-none border-none sm:h-full sm:pt-1 xl
-            lg:pl-[5rem]`}
+            lg:pl-[5rem] focus:outline-none active:border-none focus:border-none`}
           />
         </div>
       </section>

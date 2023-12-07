@@ -52,6 +52,9 @@ export default {
           'very-dark-grayish-blue-2': 'hsl(237, 14%, 26%)',
         },
       },
+      boxShadow: {
+        borderGradient: '0 0 0 2px from-primary-firstColor to-primary-secondColor',
+      },
       //media quarry
       screens: {
         'sm': '320px', // Added custom breakpoint for 320px

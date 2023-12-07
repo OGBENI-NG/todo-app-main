@@ -91,6 +91,12 @@ export default function App() {
       setFilter("All");
     }
   };
+   // Function to handle Enter key press
+   const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSendTodo();
+    }
+  };
 
   // Function to delete all checked todos
   const deleteCheckedTodos = () => {
@@ -146,7 +152,10 @@ export default function App() {
           toggleTheme={toggleTheme}
           inputValue={inputValue}
           handleSendTodo={handleSendTodo}
-          handleChange={handleChange}
+          onChange={handleChange}
+          onKeyPress={handleKeyPress}
+          
+         
         />
         <Main
           theme={theme}
